@@ -1,0 +1,37 @@
+.review-pdf-viewer { overflow: auto; max-height: 78vh; padding: 20px; overscroll-behavior: contain; }
+.review-pdf-page { position: relative; flex: none; margin: 0 auto 20px; background: white; box-shadow: 0 2px 8px #0002; }
+.review-pdf-page:last-child { margin-bottom: 0; }
+.review-pdf-page canvas { display: block; width: 100%; height: 100%; }
+/* PDF.js TextLayer uses these CSS variables to keep selectable text aligned with the canvas. */
+.review-pdf-text { position: absolute; inset: 0; overflow: clip; line-height: 1; text-align: initial; letter-spacing: normal; word-spacing: normal; text-size-adjust: none; forced-color-adjust: none; transform-origin: 0 0; --min-font-size: 1; --text-scale-factor: calc(var(--total-scale-factor) * var(--min-font-size)); --min-font-size-inv: calc(1 / var(--min-font-size)); }
+.review-pdf-text :is(span, br) { color: transparent; position: absolute; white-space: pre; cursor: text; transform-origin: 0 0; user-select: text; }
+.review-pdf-text > :not(.markedContent), .review-pdf-text .markedContent span:not(.markedContent) { --font-height: 0; font-size: calc(var(--text-scale-factor) * var(--font-height)); --scale-x: 1; --rotate: 0deg; transform: rotate(var(--rotate)) scaleX(var(--scale-x)) scale(var(--min-font-size-inv)); }
+.review-pdf-text .markedContent { display: contents; }
+.review-pdf-text ::selection { background: #2563eb50; }
+.review-pdf-highlights { position: absolute; inset: 0; pointer-events: none; }
+.review-pdf-highlight { position: absolute; background: #fde68a99; border-radius: 2px; scroll-margin: 100px; mix-blend-mode: multiply; transition: background 140ms, box-shadow 140ms; }
+.review-pdf-highlight.is-active { background: #93c5fd80; box-shadow: inset 0 -1.5px #2563eb; }
+.review-pdf-highlight.is-draft { background: #bfdbfe80; box-shadow: inset 0 -1px #3b82f6; }
+.review-pdf-highlights:has(.is-active) .review-pdf-highlight:not(.is-active):not(.is-draft) { opacity: 0.35; }
+.review-pdf-highlight.is-section { background: transparent; border-left: 3px solid #cbd5e1; border-radius: 0; transform: translateX(-6px); }
+.review-pdf-highlight.is-section.is-active { background: transparent; border-left-color: #2563eb; box-shadow: none; }
+.review-pdf-pin { position: absolute; z-index: 2; width: 22px; height: 22px; border: 1px solid #fcd34d; border-radius: 7px; background: #fef3c7; color: #92400e; font: 600 11px sans-serif; box-shadow: 0 1px 3px #0001; cursor: pointer; transform: translate(-50%, -50%); transition: background 140ms, color 140ms; }
+.review-pdf-pin.is-active { background: #2563eb; border-color: #2563eb; color: white; }
+.review-pdf-pin:focus-visible { outline: 2px solid #2563eb; outline-offset: 3px; }
+.review-pdf-selection-toolbar { position: absolute; z-index: 3; display: flex; align-items: center; margin-top: 8px; padding: 3px; transform: translateX(-50%); background: white; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 4px 14px #0f172a25; }
+.review-pdf-selection-toolbar button { display: inline-flex; align-items: center; gap: 6px; padding: 6px 8px; border-radius: 5px; color: #1e293b; font: 500 12px sans-serif; white-space: nowrap; }
+.review-pdf-selection-toolbar button:hover { background: #eff6ff; color: #1d4ed8; }
+.review-pdf-selection-toolbar button:focus-visible { outline: 2px solid #2563eb; }
+.review-pdf-edit-target { position: absolute; z-index: 1; border: 1px solid transparent; border-radius: 3px; cursor: text; background: transparent; }
+.review-pdf-edit-target:hover, .review-pdf-edit-target:focus-visible { border-color: #93c5fd; outline: 1px solid #93c5fd; }
+.review-pdf-edit-target > span { position: absolute; top: -18px; right: 0; display: inline-flex; align-items: center; gap: 3px; padding: 1px 5px; background: #2563eb; color: white; border-radius: 3px; font: 10px sans-serif; opacity: 0; transition: opacity 140ms; }
+.review-pdf-edit-target:hover > span, .review-pdf-edit-target:focus-visible > span { opacity: 1; }
+.review-pdf-inline-edit { position: absolute; z-index: 4; min-width: 160px; }
+.review-pdf-inline-edit textarea { max-height: 240px; }
+.review-pdf-comment-list { max-height: 52vh; overflow-y: auto; overscroll-behavior: contain; padding: 3px; margin: -3px; scrollbar-width: thin; }
+.review-pdf-comment-list > article + article { margin-top: 12px; }
+/* Smooth selection (see lib/pdf-text-selection.ts): an invisible end-of-content block anchors drags that start
+   beside a line. It covers the layer only while selecting, beneath the text spans. */
+.review-pdf-text .endOfContent { display: block; position: absolute; inset: 100% 0 0; z-index: 0; cursor: default; user-select: none; transform: none; }
+.review-pdf-text.selecting .endOfContent { top: 0; }
+.review-pdf-text > :not(.markedContent):not(.endOfContent), .review-pdf-text .markedContent span:not(.markedContent) { z-index: 1; }

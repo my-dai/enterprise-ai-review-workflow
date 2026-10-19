@@ -19,6 +19,10 @@ synthetic records and local adapters. It contains no company documents,
 SharePoint URLs, tenant identifiers, flow endpoints, credentials, or production
 configuration.
 
+The [`app-preview`](app-preview/) directory contains the fuller sanitized React
+and TypeScript interface from my personal development backup, including the
+form-review components and a local simulated-service preview.
+
 ## Run
 
 ```bash
