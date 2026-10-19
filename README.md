@@ -1,5 +1,7 @@
 # Enterprise AI Review Workflow
 
+[![Test](https://github.com/my-dai/enterprise-ai-review-workflow/actions/workflows/test.yml/badge.svg)](https://github.com/my-dai/enterprise-ai-review-workflow/actions/workflows/test.yml)
+
 I developed this workflow for a sponsored University of Michigan
 Multidisciplinary Design Program project. It supports the review of lessons
 learned before they are approved and published to an internal knowledge
