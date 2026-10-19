@@ -1,27 +1,30 @@
-# Enterprise AI Review Workflow Demo
+# Enterprise AI Review Workflow
 
-A standalone TypeScript model of the review-assistance features I developed for
-a sponsored University of Michigan Multidisciplinary Design Program project.
-The system helps employees refine lessons learned before approval and library
-publication.
+I developed this workflow for a sponsored University of Michigan
+Multidisciplinary Design Program project. It supports the review of lessons
+learned before they are approved and published to an internal knowledge
+library.
 
-This demo focuses on workflow logic rather than vendor-specific configuration:
+The public code covers the parts of the system I worked on that can run without
+company services:
 
-- field-level revision suggestions with explicit apply and undo states;
-- keyword recommendations that remain user-controlled;
-- reference matching against an approved knowledge library;
-- duplicate-risk signals before a record enters the library; and
-- review follow-up state that keeps comments attached to the relevant field.
+- field-specific feedback and proposed revisions with apply and undo;
+- keyword suggestions that the author can accept or revise;
+- reference matching against an approved lesson library;
+- duplicate-risk checks before publication; and
+- review comments that remain attached to the relevant field across revisions.
 
-The original project integrates a Power Apps interface with Power Automate,
-SharePoint, Copilot Studio, and structured LLM outputs. This repository uses
-synthetic records and local adapters. It contains no company documents,
-SharePoint URLs, tenant identifiers, flow endpoints, credentials, or production
-configuration.
+The project stack includes Power Apps, Power Automate, SharePoint, Copilot
+Studio, React, TypeScript, and structured model responses. Company records and
+deployment settings are replaced here with local fixtures and adapters.
 
-The [`app-preview`](app-preview/) directory contains the fuller sanitized React
-and TypeScript interface from my personal development backup, including the
-form-review components and a local simulated-service preview.
+## Repository layout
+
+- `src/` contains a small, testable model of revision, library-match, and
+  follow-up behavior.
+- `app-preview/` contains the React interface and a browser preview backed by
+  simulated services.
+- `tests/` covers suggestion state, reference ranking, and review follow-up.
 
 ## Run
 
@@ -31,9 +34,18 @@ npm test
 npm run demo
 ```
 
+To run the full interface:
+
+```bash
+cd app-preview
+npm install
+npm run test:portfolio
+npm run dev:preview
+```
+
 ## Design principle
 
-AI suggestions are proposals, not silent edits. Each recommendation records its
-reason and source references; the reviewer can apply, revise, or undo it before
-the item advances in the approval workflow.
+Suggestions never change an author’s text automatically. The interface keeps
+the recommendation, reason, and source references visible, and the reviewer can
+apply, revise, or undo a change before the lesson advances.
 

@@ -1,6 +1,8 @@
 {
   "name": "enterprise-ai-review-workflow",
   "version": "0.1.0",
+  "description": "Review workflow for lesson revisions, library matching, duplicate checks, and reviewer follow-up",
+  "license": "MIT",
   "private": false,
   "type": "module",
   "scripts": {

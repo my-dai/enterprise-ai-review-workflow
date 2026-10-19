@@ -1,16 +1,16 @@
-# Lessons Learned Review App Preview
+# Lessons Learned Review App
 
-This folder is a sanitized backup of the React and TypeScript interface I built
-for a sponsored University of Michigan MDP project. It shows how AI assistance
-fits into an employee review workflow: field-specific feedback, proposed
-revisions with apply/undo controls, keyword suggestions, library references,
-duplicate-risk checks, and reviewer follow-up.
+This folder contains the React and TypeScript interface I built for a sponsored
+University of Michigan MDP project. The main screens cover lesson intake,
+field-specific feedback, proposed revisions, keyword suggestions, library
+references, duplicate checks, approvals, and reviewer follow-up.
 
-The local preview uses synthetic lessons and simulated AI responses. Generated
-Power Apps bindings, SharePoint data models, tenant and environment identifiers,
-flow endpoints, credentials, and company records are intentionally excluded.
+The browser preview uses sample lessons and simulated service responses so the
+review flow can be run locally. Power Apps bindings and organization-specific
+SharePoint, environment, and flow configuration are not part of this public
+repository.
 
-## Run the portfolio preview
+## Run locally
 
 ```bash
 npm install
@@ -26,7 +26,7 @@ Then open `http://127.0.0.1:5187/preview/`.
 npm run test:portfolio
 ```
 
-The original deployment connects the same interface patterns to Power Apps,
-Power Automate, SharePoint, Copilot Studio, and organization-managed AI flows.
-Those connectors are represented here by local adapters so the public project
-is runnable without exposing deployment details.
+In the sponsored project, the interface connects to Power Apps, Power Automate,
+SharePoint, Copilot Studio, and organization-managed model flows. The local
+adapters preserve the same request and review boundaries without requiring
+those services.
